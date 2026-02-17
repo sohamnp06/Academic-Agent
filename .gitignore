@@ -10,3 +10,6 @@ __pycache__/
 *.ckpt
 vector_db/
 agentAcademic/data/raw_pdfs/
+*.pt
+*.bin
+.DS_Store
