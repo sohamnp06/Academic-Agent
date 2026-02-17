@@ -1,0 +1,12 @@
+*.pyc
+.cache/
+data/raw_pdfs/
+data/student_db.json
+venv/
+torch_gpu/
+__pycache__/
+*.pt
+*.pth
+*.ckpt
+vector_db/
+agentAcademic/data/raw_pdfs/
