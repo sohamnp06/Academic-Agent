@@ -13,3 +13,20 @@ agentAcademic/data/raw_pdfs/
 *.pt
 *.bin
 .DS_Store
+
+# Virtual environments
+venv/
+torch_gpu/
+torch_gpu311/
+
+# Python
+__pycache__/
+*.pyc
+
+# Models
+*.pt
+*.bin
+*.safetensors
+
+# Huggingface cache
+.cache/
