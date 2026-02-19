@@ -5,12 +5,11 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-import torch
 
 DATA_PATH = "data/raw_pdfs"
 VECTOR_DB_PATH = "vector_db"
-
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+INDEX_PATH = os.path.join(VECTOR_DB_PATH, "index.faiss")
+DOC_PATH = os.path.join(VECTOR_DB_PATH, "documents.pkl")
 
 
 def extract_text_from_pdf(pdf_path):
@@ -33,14 +32,35 @@ def chunk_text(text):
     return splitter.split_text(text)
 
 
-def ingest_documents():
+def load_existing_data():
+
+    if os.path.exists(INDEX_PATH) and os.path.exists(DOC_PATH):
+        print("Loading existing vector database...")
+
+        index = faiss.read_index(INDEX_PATH)
+
+        with open(DOC_PATH, "rb") as f:
+            documents = pickle.load(f)
+
+        existing_sources = set(doc["source"] for doc in documents)
+
+        return index, documents, existing_sources
+
+    print("No existing vector DB found. Creating new one.")
+
+    return None, [], set()
+
+
+def ingest_new_documents(existing_sources):
+
     documents = []
 
     for root, dirs, files in os.walk(DATA_PATH):
         for file in files:
-            if file.lower().endswith(".pdf"):
+            if file.lower().endswith(".pdf") and file not in existing_sources:
+
                 full_path = os.path.join(root, file)
-                print(f"Processing: {full_path}")
+                print(f"Processing NEW file: {full_path}")
 
                 text = extract_text_from_pdf(full_path)
 
@@ -59,37 +79,57 @@ def ingest_documents():
     return documents
 
 
-def create_vector_store(documents):
-
-    if len(documents) == 0:
-        print("No valid text documents found.")
-        return
-
-    print("Creating embeddings on:", DEVICE)
-
-    model = SentenceTransformer("all-MiniLM-L6-v2", device=DEVICE)
-
-    texts = [doc["text"] for doc in documents]
-
-    embeddings = model.encode(texts, batch_size=32, show_progress_bar=True)
-    embeddings = np.array(embeddings).astype("float32")
-
-    dimension = embeddings.shape[1]
-    index = faiss.IndexFlatL2(dimension)
-    index.add(embeddings)
+def save_data(index, documents):
 
     os.makedirs(VECTOR_DB_PATH, exist_ok=True)
 
-    faiss.write_index(index, os.path.join(VECTOR_DB_PATH, "index.faiss"))
+    faiss.write_index(index, INDEX_PATH)
 
-    with open(os.path.join(VECTOR_DB_PATH, "documents.pkl"), "wb") as f:
+    with open(DOC_PATH, "wb") as f:
         pickle.dump(documents, f)
 
-    print("Vector database created successfully!")
+
+def main():
+
+    model = SentenceTransformer(
+        "sentence-transformers/static-retrieval-mrl-en-v1",
+        device="cpu"
+    )
+
+    index, existing_docs, existing_sources = load_existing_data()
+
+    new_docs = ingest_new_documents(existing_sources)
+
+    if not new_docs:
+        print("No new PDFs found.")
+        return
+
+    texts = [doc["text"] for doc in new_docs]
+
+    print("Embedding new chunks...")
+
+    embeddings = model.encode(
+        texts,
+        batch_size=64,
+        normalize_embeddings=True,
+        show_progress_bar=True
+    )
+
+    embeddings = np.array(embeddings).astype("float32")
+
+    if index is None:
+        dimension = embeddings.shape[1]
+        index = faiss.IndexFlatL2(dimension)
+
+    index.add(embeddings)
+
+    all_documents = existing_docs + new_docs
+
+    save_data(index, all_documents)
+
+    print("Vector DB updated!")
+    print(f"Total chunks stored: {len(all_documents)}")
 
 
 if __name__ == "__main__":
-    print("Starting ingestion...")
-    docs = ingest_documents()
-    print(f"Total chunks created: {len(docs)}")
-    create_vector_store(docs)
+    main()

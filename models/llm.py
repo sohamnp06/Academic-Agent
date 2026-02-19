@@ -6,9 +6,12 @@ MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 print("Loading local LLM...(first time may take ~30 seconds)")
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+
+# Load model in FP16 + automatic device placement
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
-    torch_dtype=torch.float32
+    torch_dtype=torch.float16,
+    device_map="auto"
 )
 
 generator = pipeline(

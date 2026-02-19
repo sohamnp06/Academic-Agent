@@ -1,10 +1,10 @@
 {
   "akash": {
     "topics": {
-      "coding": 0.15,
+      "coding": 0.51585,
       "maths": 0.7350000000000001,
-      "general": 0.7350000000000001,
-      "sports": 0.6
+      "general": 0.8115000000000001,
+      "sports": 0.39
     },
     "misconceptions": {
       "coding": [
@@ -17,6 +17,9 @@
         "Operating system is the software that interfaces with hardware devices and provides services to programs and users. It manages resources, ensures smooth operation, and provides a consistent user interface.",
         "Academic material doesn't provide a specific definition of an operating system.",
         "The sentence identifies the conceptual misunderstanding of modifying the other and the operating system through interrupts."
+      ],
+      "sports": [
+        "Difference between Monolithic and Microkernel"
       ]
     }
   }

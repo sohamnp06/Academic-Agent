@@ -1,8 +1,4 @@
 from models.llm import generate_answer
-import torch
-
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
 
 def generate_adaptive_answer(context_chunks, question, misconceptions):
 

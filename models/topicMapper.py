@@ -1,10 +1,10 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
-import torch
 
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
-model = SentenceTransformer("all-MiniLM-L6-v2", device=DEVICE)
+model = SentenceTransformer(
+    "sentence-transformers/static-retrieval-mrl-en-v1",
+    device="cpu"
+)
 
 TOPICS = ["maths", "coding", "general", "sports"]
 

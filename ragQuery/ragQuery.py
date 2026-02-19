@@ -16,14 +16,16 @@ index = faiss.read_index(f"{VECTOR_DB_PATH}/index.faiss")
 
 with open(f"{VECTOR_DB_PATH}/documents.pkl", "rb") as f:
     documents = pickle.load(f)
-    
-model = SentenceTransformer("all-MiniLM-L6-v2", device="cuda")
 
+model = SentenceTransformer(
+    "sentence-transformers/static-retrieval-mrl-en-v1",
+    device="cpu"
+)
 
 
 def retrieve_context(query, top_k=3):
 
-    query_embedding = model.encode([query])
+    query_embedding = model.encode([query], normalize_embeddings=True)
     query_embedding = np.array(query_embedding).astype("float32")
 
     distances, indices = index.search(query_embedding, top_k)
@@ -105,7 +107,6 @@ if __name__ == "__main__":
             interaction_quality = 1
         else:
             interaction_quality = -1
-           
             misconception = detect_misconception(chunks, query, answer)
             add_misconception(student_id, topic, misconception)
             print(f"\nDetected Misconception: {misconception}\n")
