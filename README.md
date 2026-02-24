@@ -22,7 +22,6 @@ This project was developed as part of a hackathon education problem statement an
 - FAISS semantic search  
 - Context-aware LLM responses  
 
----
 
 ### ✅ Student Mastery Modeling
 Tracks each student’s understanding per topic:
@@ -33,7 +32,6 @@ Tracks each student’s understanding per topic:
 
 Stored in JSON for persistence.
 
----
 
 ### ✅ Misconception Detection
 Automatically identifies conceptual misunderstandings using:
@@ -42,7 +40,6 @@ Automatically identifies conceptual misunderstandings using:
 - Response analysis  
 - Pattern detection  
 
----
 
 ### ✅ Adaptive Tutoring
 Generates explanations based on:
@@ -51,7 +48,6 @@ Generates explanations based on:
 - Detected misconceptions  
 - Difficulty adaptation  
 
----
 
 ### ✅ Teacher Analytics Dashboard
 
@@ -61,7 +57,6 @@ Provides:
 - Topic-wise misconceptions
 - Learning recommendations
 
----
 
 ### ✅ Academic Integrity Guardrails
 
@@ -73,7 +68,6 @@ Prevents:
 
 Promotes guided learning instead.
 
----
 
 ### ✅ Closed-Loop Learning System
 
@@ -112,6 +106,7 @@ AI-Academic-Agent/
 │
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
@@ -124,3 +119,43 @@ AI-Academic-Agent/
 ### Version Control - Git + GitHub is it correct
 
 ---
+## ⚡ Quick Start
+
+### 1. Clone Repository
+
+```bash
+git clone <YOUR_GIT_URL>
+cd AI-Academic-Agent
+```
+
+### 2. Activate Virtual Environment
+
+```bash
+torch_gpu\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Set Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+OPENROUTER_API_KEY=your_key_here
+```
+
+### 5. Run Ingestion
+
+```bash
+python ingestion.py
+```
+
+### 6. Start Agent
+
+```bash
+python ragQuery/ragQuery.py
+```
