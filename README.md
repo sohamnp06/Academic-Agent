@@ -1,8 +1,10 @@
-🎓 AI Academic Agent — RAG-Powered Intelligent Tutoring System
+# 🎓 AI Academic Agent — RAG-Powered Intelligent Tutoring System
 
 An end-to-end Retrieval-Augmented Generation (RAG) based Academic Assistant designed for universities — enabling personalized learning, misconception detection, student mastery modeling, teacher analytics, and closed-loop improvement.
 
-🚀 Project Overview
+---
+
+## 🚀 Project Overview
 
 The AI Academic Agent is an intelligent education platform that ingests faculty materials (PDFs), performs semantic retrieval using FAISS + Sentence Transformers, and generates adaptive responses via an LLM.
 
@@ -10,114 +12,91 @@ Beyond simple Q&A, the system models student mastery, detects misconceptions, pr
 
 This project was developed as part of a hackathon education problem statement and follows a full Machine Learning production workflow.
 
-🧠 Core Capabilities
-✅ RAG-Based Knowledge System
+---
 
-PDF ingestion + chunking
+## 🧠 Core Capabilities
 
-Vector embeddings (Sentence Transformers, GPU accelerated)
+### ✅ RAG-Based Knowledge System
+- PDF ingestion + chunking  
+- Vector embeddings (Sentence Transformers)  
+- FAISS semantic search  
+- Context-aware LLM responses  
 
-FAISS semantic search
+---
 
-Context-aware LLM responses
-
-✅ Student Mastery Modeling
-
+### ✅ Student Mastery Modeling
 Tracks each student’s understanding per topic:
 
-Mastered
-
-Weak
-
-Unknown
+- Mastered  
+- Weak  
+- Unknown  
 
 Stored in JSON for persistence.
 
-✅ Misconception Detection
+---
 
+### ✅ Misconception Detection
 Automatically identifies conceptual misunderstandings using:
 
-Topic mapping
+- Topic mapping  
+- Response analysis  
+- Pattern detection  
 
-Response analysis
+---
 
-Pattern detection
-
-✅ Adaptive Tutoring
-
+### ✅ Adaptive Tutoring
 Generates explanations based on:
 
-Student mastery level
+- Student mastery level  
+- Detected misconceptions  
+- Difficulty adaptation  
 
-Detected misconceptions
+---
 
-Difficulty adaptation
-
-✅ Teacher Analytics Dashboard
+### ✅ Teacher Analytics Dashboard
 
 Provides:
 
-Students marked CRITICAL / AT RISK
+- Students marked **CRITICAL / AT RISK**
+- Topic-wise misconceptions
+- Learning recommendations
 
-Topic-wise misconceptions
+---
 
-Learning recommendations
-
-✅ Academic Integrity Guardrails
+### ✅ Academic Integrity Guardrails
 
 Prevents:
 
-Direct answer dumping
-
-Cheating behavior
-
-Exam-style exploitation
+- Direct answer dumping  
+- Cheating behavior  
+- Exam-style exploitation  
 
 Promotes guided learning instead.
 
-✅ Closed-Loop Learning System
+---
+
+### ✅ Closed-Loop Learning System
 
 Feedback from each interaction updates:
 
-Student mastery
-
-Misconceptions
-
-Risk level
-
-Recommendations
+- Student mastery  
+- Misconceptions  
+- Risk level  
+- Recommendations  
 
 Creating a self-improving educational pipeline.
 
-🏗️ System Architecture
-PDFs
- ↓
-Ingestion → Chunking → Embeddings → FAISS
- ↓
-User Query
- ↓
-Retriever
- ↓
-LLM Generator
- ↓
-Adaptive Explanation
- ↓
-Misconception Detection
- ↓
-Student Mastery Update
- ↓
-Teacher Analytics
- ↓
-Closed Loop Feedback
+---
 
+## 📂 Project Structure
 
-📂 Project Structure
+```bash
 AI-Academic-Agent/
 │
-├── ingestion.py                 # PDF ingestion + chunking + FAISS + embeddings
+├── ingestion.py
 │
 ├── ragQuery/
-│   └── ragQuery.py             # Main pipeline loop
+│   └── ragQuery.py
 │
 ├── models/
 │   ├── adaptiveAnswer.py
@@ -129,52 +108,21 @@ AI-Academic-Agent/
 │   └── llm.py
 │
 ├── data/
-│   └── students.json           # Mastery tracking
+│   └── students.json
 │
 ├── requirements.txt
 └── README.md
 
-🛠️ Tech Stack
-Programming Language
+## 🛠️ Tech Stack 
 
-Python 3.11
+### Programming Language - Python 3.11 
 
-Machine Learning & NLP
+### Machine Learning & NLP - PyTorch - Sentence Transformers - Hugging Face Transformers - FAISS 
 
-PyTorch
+### LLM Integration - OpenRouter API 
 
-Sentence Transformers
+### Data Processing - NumPy - Pandas 
 
-Hugging Face Transformers
+### Vector Storage - FAISS Vector Database 
 
-FAISS (Facebook AI Similarity Search)
-
-LLM Integration
-
-OpenRouter API
-
-Data Processing
-
-NumPy
-
-Pandas
-
-Vector Storage
-
-FAISS Vector Database
-
-Environment Management
-
-Python Virtual Environment
-
-1.Activate Virtual Environment
-torch_gpu\Scripts\activate
-2.Install Dependencies
-pip install -r requirements.txt
-3. Set API Key
-Create .env:
-OPENROUTER_API_KEY=your_key_here
-4. Run Ingestion
-python ingestion.py
-5. Start Agent
-python ragQuery/ragQuery.py
+### Version Control - Git + GitHub
