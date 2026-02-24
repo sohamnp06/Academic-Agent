@@ -88,6 +88,16 @@ Creating a self-improving educational pipeline.
 
 ---
 
+## 🛠️ Tech Stack 
+### Programming Language - Python 3.11 
+### Machine Learning & NLP - PyTorch - Sentence Transformers - Hugging Face Transformers - FAISS 
+### LLM Integration - OpenRouter API 
+### Data Processing - NumPy - Pandas 
+### Vector Storage - FAISS Vector Database 
+### Version Control - Git + GitHub is it correct
+
+---
+
 ## 📂 Project Structure
 
 ```bash
@@ -113,16 +123,4 @@ AI-Academic-Agent/
 ├── requirements.txt
 └── README.md
 
-## 🛠️ Tech Stack 
 
-### Programming Language - Python 3.11 
-
-### Machine Learning & NLP - PyTorch - Sentence Transformers - Hugging Face Transformers - FAISS 
-
-### LLM Integration - OpenRouter API 
-
-### Data Processing - NumPy - Pandas 
-
-### Vector Storage - FAISS Vector Database 
-
-### Version Control - Git + GitHub
